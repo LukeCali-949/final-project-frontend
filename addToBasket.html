@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Purchase Page</title>
+    <script src="configuration.js"></script>
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: white;
+        border-bottom: 1px solid lightgray;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: orange;
+      }
+
+      .nav-items {
+        display: flex;
+        gap: 15px;
+      }
+
+      .nav-items a {
+        text-decoration: none;
+        color: black;
+        font-weight: normal;
+      }
+
+      .cart {
+        display: flex;
+        align-items: center;
+      }
+
+      .cart img {
+        margin-right: 5px;
+        width: 40px;
+      }
+
+      .login img {
+        width: 40px;
+      }
+
+      .cart-items {
+        font-size: 13px;
+        color: white;
+        position: absolute;
+        right: 38px;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .main-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .left-section {
+        width: 50%;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .left-section img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .right-section {
+        width: 50%;
+        padding: 20px;
+      }
+
+      .right-section label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .right-section input[type="date"] {
+        padding: 10px;
+        border: 1px solid lightgray;
+        width: 100%;
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .purchase-options {
+        border: 1px solid lightgray;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+
+      .purchase-options .option {
+        margin-bottom: 20px;
+      }
+
+      .purchase-options .option input {
+        margin-right: 10px;
+      }
+
+      .purchase-options p {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+
+      .add-to-basket {
+        padding: 15px;
+        background-color: darkgreen;
+        color: white;
+        border: none;
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .add-to-basket:hover {
+        background-color: forestgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="index.html" class="logo">Final Project</a>
+
+      <div class="nav-items">
+        <a href="#">Track Order</a>
+        <a href="#">Help</a>
+        <a href="login.html" class="login">
+          <img src="personicon.png" />
+        </a>
+        <a href="#" class="cart">
+          <img src="carticon.png" />
+          <span class="cart-items">0</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="left-section">
+        <img
+          id="flower-image"
+          src="https://via.placeholder.com/400"
+          alt="Flower image"
+        />
+      </div>
+
+      <div class="right-section">
+        <h2 id="flower-title">PLACEHOLDER TITLE</h2>
+        <label for="delivery-date">DELIVERY DATE</label>
+        <input type="date" id="delivery-date" />
+
+        <label for="purchaseOptions">Purchasing Options</label>
+        <div class="purchase-options" id="purchaseOptions">
+          <div class="option">
+            <input type="radio" name="purchase-option" id="subscription" />
+            <label for="subscription"
+              >Start a Subscription: $52 + free shipping</label
+            >
+            <p>
+              <strong>Best Value:</strong> Up to 30% off + free shipping on
+              subscription deliveries.
+            </p>
+            <p>
+              <strong>Flexible:</strong> Pick your flowers, date & recipient
+              every month, or set it & forget it.
+            </p>
+            <p>
+              <strong>No Obligations:</strong> Skip as often as you like. Cancel
+              anytime.
+            </p>
+          </div>
+
+          <div class="option">
+            <input type="radio" name="purchase-option" id="one-time" />
+            <label for="one-time">One-time purchase: $74</label>
+          </div>
+        </div>
+
+        <button class="add-to-basket" onClick="addToBasket()">
+          ADD TO BASKET
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const storedFlower = localStorage.getItem("selectedFlower");
+
+      if (storedFlower) {
+        const flower = JSON.parse(storedFlower);
+
+        const flowerImage = document.getElementById("flower-image");
+        flowerImage.src = flower.imageURL;
+
+        const flowerTitle = document.getElementById("flower-title");
+        flowerTitle.textContent = flower.name;
+      } else {
+        console.warn("No flower data found in localStorage.");
+      }
+    </script>
+  </body>
+</html>

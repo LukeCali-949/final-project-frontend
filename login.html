@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Signup/Login Page</title>
+    <script src="configuration.js"></script>
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: white;
+        border-bottom: 1px solid lightgray;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: orange;
+      }
+
+      .nav-items {
+        display: flex;
+        gap: 15px;
+      }
+
+      .nav-items a {
+        text-decoration: none;
+        color: black;
+        font-weight: normal;
+      }
+
+      .cart {
+        display: flex;
+        align-items: center;
+      }
+
+      .cart img {
+        margin-right: 5px;
+        width: 40px;
+      }
+
+      .login img {
+        width: 40px;
+      }
+
+      .cart-items {
+        font-size: 13px;
+        color: white;
+        position: absolute;
+        right: 38px;
+      }
+
+      .content-wrapper {
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .main-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        height: 400px;
+      }
+
+      .left-section {
+        width: 50%;
+        background-color: lightpink;
+        padding: 20px;
+      }
+
+      .right-section {
+        width: 50%;
+      }
+
+      .right-section img {
+        width: auto;
+        height: 400px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        height: 100vh;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .nav-button {
+        padding: 10px 20px;
+        border: 1px solid lightgray;
+        background-color: white;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .nav-button.active {
+        background-color: lightgray;
+        font-weight: bold;
+      }
+
+      .form {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .form input {
+        padding: 10px;
+        border: 1px solid lightgray;
+        width: 300px;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      .form button {
+        padding: 10px 20px;
+        background-color: darkgreen;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .form button:hover {
+        background-color: forestgreen;
+      }
+
+      .form a {
+        color: darkgreen;
+        font-size: 12px;
+        text-decoration: underline;
+      }
+
+      .inputLabel {
+        margin-right: auto;
+        margin-bottom: 10px;
+      }
+
+      #createAnAccount {
+        width: 200px;
+        margin-top: 10px;
+      }
+
+      #showPassword {
+        margin-left: auto;
+      }
+    </style>
+    <script>
+      function toggleForm(view) {
+        const signupForm = document.getElementById("signup-form");
+        const loginForm = document.getElementById("login-form");
+        const signupButton = document.getElementById("signup-button");
+        const loginButton = document.getElementById("login-button");
+
+        if (view === "signup") {
+          signupForm.style.display = "flex";
+          loginForm.style.display = "none";
+          signupButton.classList.add("active");
+          loginButton.classList.remove("active");
+        } else {
+          signupForm.style.display = "none";
+          loginForm.style.display = "flex";
+          signupButton.classList.remove("active");
+          loginButton.classList.add("active");
+        }
+      }
+    </script>
+  </head>
+  <body onload="toggleForm('signup')">
+    <div class="navbar">
+      <a href="index.html" class="logo">Final Project</a>
+
+      <div class="nav-items">
+        <a href="#">Track Order</a>
+        <a href="#">Help</a>
+        <a href="login.html" class="login">
+          <img src="personicon.png" />
+        </a>
+        <a href="#" class="cart">
+          <img src="carticon.png" />
+          <span class="cart-items">0</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>SIGN UP TO SAVE</h2>
+      <div class="nav-buttons">
+        <button
+          id="signup-button"
+          class="nav-button active"
+          onclick="toggleForm('signup')"
+        >
+          SIGN UP
+        </button>
+        <button
+          id="login-button"
+          class="nav-button"
+          onclick="toggleForm('login')"
+        >
+          LOG IN
+        </button>
+      </div>
+
+      <div id="signup-form" class="form">
+        <label for="signupEmail" class="inputLabel">Email</label>
+        <input type="email" id="signupEmail" placeholder="name@example.com" />
+        <label for="signupPassword" class="inputLabel">Password</label>
+
+        <input type="password" id="signupPassword" placeholder="Password" />
+        <button onClick="signup()">CREATE AN ACCOUNT</button>
+        <a id="createAnAccount"
+          >By Clicking "Create an Account" you agree to the Terms of Use and
+          Privacy Policy</a
+        >
+      </div>
+
+      <div id="login-form" class="form">
+        <h2>SIGN IN</h2>
+        <label for="loginEmail" class="inputLabel">Email</label>
+        <input id="loginEmail" type="email" placeholder="name@example.com" />
+        <label for="loginPassword" class="inputLabel">Password</label>
+        <input id="loginPassword" type="password" placeholder="Password" />
+        <a id="showPassword">Show Password</a>
+
+        <button onClick="login()">LOG IN</button>
+      </div>
+    </div>
+  </body>
+</html>

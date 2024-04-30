@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Homepage</title>
+
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: white;
+        border-bottom: 1px solid lightgray;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: orange;
+      }
+
+      .nav-items {
+        display: flex;
+        gap: 15px;
+      }
+
+      .nav-items a {
+        text-decoration: none;
+        color: black;
+        font-weight: normal;
+      }
+
+      .cart {
+        display: flex;
+        align-items: center;
+      }
+
+      .cart img {
+        margin-right: 5px;
+        width: 40px;
+      }
+
+      .login img {
+        width: 40px;
+      }
+
+      .cart-items {
+        font-size: 13px;
+        color: white;
+        position: absolute;
+        right: 38px;
+      }
+
+      .content-wrapper {
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .main-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        height: 400px;
+      }
+
+      .left-section {
+        width: 50%;
+        background-color: lightpink;
+        padding: 20px;
+      }
+
+      .right-section {
+        width: 50%;
+      }
+
+      .right-section img {
+        width: auto;
+        height: 400px;
+      }
+
+      /* flower option stylin */
+      .filter-sort {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        background-color: #f7f7f7;
+      }
+      .dropdown {
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 4px;
+        background: white;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .flower-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        width: 30%;
+        text-align: left;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .flower-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+      .flower-card img {
+        max-width: 80%;
+        height: auto;
+      }
+      .flower-info {
+        margin-top: 10px;
+      }
+      .flower-info h3 {
+        margin: 0;
+      }
+      .flower-info p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">Final Project</div>
+
+      <div class="nav-items">
+        <a href="#">Track Order</a>
+        <a href="#">Help</a>
+        <a href="login.html" class="login">
+          <img src="personicon.png" />
+        </a>
+        <a href="#" class="cart">
+          <img src="carticon.png" />
+          <span class="cart-items">0</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="main-content">
+        <div class="left-section">
+          <h2>Send Her Blooms</h2>
+          <p>She will Love! Shop All Mother's Day Flowers and Gifts!</p>
+        </div>
+        <div class="right-section">
+          <img
+            src="https://media.istockphoto.com/id/1159802579/photo/a-lot-of-flower-bouquets-at-the-florist-shop-on-the-table-made-of-hydrangea-roses-peonies.jpg?s=612x612&w=0&k=20&c=bI1YqRYuX_F0E0HSvQM4Zqo2MawIi_-SJ-sWekU681U="
+            alt="Flowers"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-sort">
+      <div class="filter">
+        <label for="flower-type">Filter by:</label>
+        <select class="dropdown" id="flower-type">
+          <option value="">Flower Type</option>
+          <option value="Roses">Roses</option>
+          <option value="Lilies">Lilies</option>
+          <option value="Tulips">Tulips</option>
+          <option value="Dasies">Dasies</option>
+        </select>
+
+        <select class="dropdown" id="occasion">
+          <option value="">Occasion</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Mother's Day">Mother's Day</option>
+          <option value="Thank You">Thank You</option>
+        </select>
+
+        <select class="dropdown" id="color">
+          <option value="">Color</option>
+          <option value="Red">Red</option>
+          <option value="Yellow">Yellow</option>
+          <option value="Orange">Orange</option>
+          <option value="Mixed">Mixed</option>
+        </select>
+      </div>
+
+      <div class="sort">
+        <label for="sort-price">Sort:</label>
+        <select class="dropdown" id="sort-price">
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="container" id="flower-container"></div>
+    <script>
+      const flowerData = [
+        {
+          name: "Radiant Rose",
+          flower_type: "Roses",
+          occasion: "Birthday",
+          color: "Red",
+          price: 54,
+          imageURL:
+            "https://files.oaiusercontent.com/file-AoOH71Bt8bCL4kR6GWouE3fh?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dc85126a7-b2d2-43e0-92ee-7b1440718d10.webp&sig=xDtjhzZ2n0q%2B83CYt5ON/JQkxbO1Gn7Hq3LVFn/lUPM%3D",
+        },
+        {
+          name: "Golden Lily",
+          flower_type: "Lilies",
+          occasion: "Mother's Day",
+          color: "Yellow",
+          price: 47,
+          imageURL:
+            "https://files.oaiusercontent.com/file-2XEmXGEJ07qY8L9E1smUTgK9?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D36875d3f-46c2-4a44-907b-564e6b09ab1d.webp&sig=ULgEHtoKV4/kQGxu2Z8VbQj95kQDcu5wVTj4su4CAWA%3D",
+        },
+        {
+          name: "Vibrant Tulip",
+          flower_type: "Tulips",
+          occasion: "Thank You",
+          color: "Mixed",
+          price: 56,
+          imageURL:
+            "https://files.oaiusercontent.com/file-YvgNnVF8Yewtpde4sUMUMi2I?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D02db3308-ab38-49d4-936b-8a7b0750e14d.webp&sig=V4uB/WhWb/M9z8sco73QiynKquPJ3zpFbOET8QWteFo%3D",
+        },
+        {
+          name: "Sunny Daisy",
+          flower_type: "Dasies",
+          occasion: "Mother's Day",
+          color: "Orange",
+          price: 41,
+          imageURL:
+            "https://files.oaiusercontent.com/file-KRWs1lEduN10YvvvLQbCDU07?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D92853e4c-128c-4d3f-be24-c29ddeff4a63.webp&sig=/CzRDDODdby%2BMu0%2BLrbvlrNOGumE1pGspajn7HHnlCE%3D",
+        },
+        {
+          name: "Serene Rose",
+          flower_type: "Roses",
+          occasion: "Thank You",
+          color: "Green",
+          price: 58,
+          imageURL:
+            "https://files.oaiusercontent.com/file-nxQVePhhvrG5Qt14d4tNvqXa?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dc169f167-ef1f-42de-8757-e1e29bdc3ea6.webp&sig=szoo5dPDZe0YlAH26BtOPbK4i0pVH9uTeJt9SpSZUi8%3D",
+        },
+        {
+          name: "Festive Lily",
+          flower_type: "Lilies",
+          occasion: "Birthday",
+          color: "Mixed",
+          price: 50,
+          imageURL:
+            "https://files.oaiusercontent.com/file-Fv4ksPVL4e23lMXdUZR1DGbb?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dbd64d19e-22c4-42c2-b842-bdd94e185b40.webp&sig=A9pFtsfTJ5aVynamk78IijR9qAzj6T9oqYr3ry1h1Cc%3D",
+        },
+      ];
+
+      const container = document.getElementById("flower-container");
+
+      const renderFlowers = (flowers) => {
+        container.innerHTML = "";
+        flowers.map((flower) => {
+          const flowerCard = document.createElement("div");
+          flowerCard.className = "flower-card";
+
+          const img = document.createElement("img");
+          img.src = flower.imageURL;
+          img.alt = flower.name;
+
+          const flowerInfo = document.createElement("div");
+          flowerInfo.className = "flower-info";
+
+          const name = document.createElement("h3");
+          name.textContent = flower.name;
+
+          const price = document.createElement("p");
+          price.textContent = `from $${flower.price}`;
+
+          flowerInfo.appendChild(name);
+          flowerInfo.appendChild(price);
+
+          flowerCard.appendChild(img);
+          flowerCard.appendChild(flowerInfo);
+
+          flowerCard.addEventListener("click", () => {
+            localStorage.setItem("selectedFlower", JSON.stringify(flower));
+            window.location.href = "addToBasket.html";
+          });
+
+          container.appendChild(flowerCard);
+        });
+      };
+
+      renderFlowers(flowerData);
+
+      const filterFlowers = () => {
+        const flowerType = document.getElementById("flower-type").value;
+        const occasion = document.getElementById("occasion").value;
+        const color = document.getElementById("color").value;
+        const sortPrice = document.getElementById("sort-price").value;
+
+        let filteredFlowers = flowerData;
+
+        if (flowerType) {
+          filteredFlowers = filteredFlowers.filter(
+            (flower) => flower.flower_type === flowerType
+          );
+        }
+        if (occasion) {
+          filteredFlowers = filteredFlowers.filter(
+            (flower) => flower.occasion === occasion
+          );
+        }
+        if (color) {
+          filteredFlowers = filteredFlowers.filter(
+            (flower) => flower.color === color
+          );
+        }
+
+        if (sortPrice === "asc") {
+          filteredFlowers.sort((a, b) => a.price - b.price);
+        } else if (sortPrice === "desc") {
+          filteredFlowers.sort((a, b) => b.price - a.price);
+        }
+
+        renderFlowers(filteredFlowers);
+      };
+
+      document
+        .getElementById("flower-type")
+        .addEventListener("change", filterFlowers);
+      document
+        .getElementById("occasion")
+        .addEventListener("change", filterFlowers);
+      document
+        .getElementById("color")
+        .addEventListener("change", filterFlowers);
+      document
+        .getElementById("sort-price")
+        .addEventListener("change", filterFlowers);
+    </script>
+  </body>
+</html>

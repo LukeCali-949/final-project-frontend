@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Delivery Process</title>
+    <script src="configuration.js"></script>
+    <style>
+      .progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #f7f7f7;
+      }
+
+      .progress-bar {
+        position: relative;
+        height: 5px;
+        background-color: #c7c7c7;
+        width: 100%;
+        margin: 0 10px;
+      }
+
+      .progress-bar .completed {
+        width: 100%;
+        height: 100%;
+        background-color: #00704a;
+      }
+
+      .step {
+        font-size: 14px;
+        text-align: center;
+        flex: 1;
+      }
+
+      .step.completed {
+        color: #00704a;
+      }
+
+      .step.pending {
+        color: lightgray;
+      }
+
+      .info-box {
+        background-color: #00704a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .button {
+        padding: 10px 20px;
+        border: 1px solid #00704a;
+        background-color: white;
+        color: #00704a;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #00704a;
+        color: white;
+      }
+
+      #delivery {
+        font-weight: bold;
+        border: 5px solid #00704a;
+        padding: 3px;
+      }
+
+      #loggedOutUser {
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Styles for Delivery Info */
+      .delivery-info {
+        background-color: #fff;
+        padding: 20px;
+        margin-top: 20px;
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .delivery-info h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .delivery-info .delivery-date strong {
+        font-size: 16px;
+      }
+
+      .delivery-info .delivery-date p {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .form-section h3 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .form-section {
+        margin-bottom: 20px;
+      }
+
+      .form-section label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-section input,
+      .form-section select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+      }
+
+      .form-section input[type="button"] {
+        background-color: #00704a;
+        color: white;
+        border: none;
+      }
+
+      .titleInfo {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .flex {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .deliveryInputs {
+        width: 100%;
+      }
+
+      #flower-image {
+        width: 150px;
+        margin-bottom: 10px;
+      }
+
+      .delivery-date {
+        width: 222px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #flowDelivDate {
+        font-weight: bold;
+        color: #00704a;
+      }
+
+      #contButton {
+        margin-left: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loggedOutUser">
+      <div class="progress">
+        <div class="step completed">REVIEW</div>
+        <div class="progress-bar">
+          <div class="completed"></div>
+        </div>
+        <div class="step completed" id="delivery">DELIVERY</div>
+
+        <div class="progress-bar"></div>
+
+        <div class="step pending">DONE</div>
+      </div>
+
+      <div class="info-box">Save $10 on every delivery with an account.</div>
+
+      <div class="actions">
+        <button class="button" onClick="directToLoginPage()">LOG IN</button>
+        <button class="button" onClick="directToLoginPage()">SIGN UP</button>
+      </div>
+    </div>
+    <div class="delivery-info">
+      <hr />
+      <div class="titleInfo">
+        <h2 id="flower-title">THE ANGELS</h2>
+        <h2 id="flower-price">$74</h2>
+      </div>
+      <hr />
+
+      <div class="flex">
+        <div class="delivery-date">
+          <img
+            id="flower-image"
+            src="https://via.placeholder.com/400"
+            alt="Flower image"
+          />
+          <strong>Delivery Date</strong>
+          <p id="flowDelivDate">Apr 30, 2024</p>
+        </div>
+
+        <div class="deliveryInputs">
+          <form id="recipient-form">
+            <div class="form-section">
+              <h3>RECIPIENT</h3>
+              <label for="first-name">First Name*</label>
+              <input type="text" id="first-name" placeholder="First Name" />
+
+              <label for="last-name">Last Name*</label>
+              <input type="text" id="last-name" placeholder="Last Name" />
+
+              <label for="relationship">Relationship*</label>
+              <select id="relationship">
+                <option value="">Select</option>
+                <option value="single">Single</option>
+                <option value="in_a_relationship">In a Relationship</option>
+                <option value="engaged">Engaged</option>
+                <option value="married">Married</option>
+                <option value="civil_union">Civil Union</option>
+                <option value="domestic_partnership">
+                  Domestic Partnership
+                </option>
+                <option value="separated">Separated</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+
+            <div class="form-section">
+              <h3>DELIVER TO</h3>
+              <label for="address">Address*</label>
+              <input type="text" id="address" placeholder="Address" />
+
+              <label for="apartment">Apt/Suite</label>
+              <input type="text" id="apartment" placeholder="Apt/Suite" />
+
+              <label for="city">City*</label>
+              <input type="text" id="city" placeholder="City" />
+
+              <label for="state">State*</label>
+              <select id="state">
+                <option value="">Select</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+              </select>
+
+              <label for="zip-code">Zip Code*</label>
+              <input type="text" id="zip-code" placeholder="Zip Code" />
+            </div>
+
+            <button
+              type="button"
+              id="contButton"
+              class="button"
+              onClick="submitForm()"
+            >
+              CONTINUE
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      const storedFlower = localStorage.getItem("selectedFlower");
+      const deliveryDate = localStorage.getItem("deliveryDate");
+
+      if (storedFlower) {
+        const flower = JSON.parse(storedFlower);
+
+        const flowerImage = document.getElementById("flower-image");
+        flowerImage.src = flower.imageURL;
+
+        const flowerDate = document.getElementById("flowDelivDate");
+        flowerDate.textContent = deliveryDate;
+
+        const flowerPrice = document.getElementById("flower-price");
+        flowerPrice.textContent = "$" + flower.price;
+        const flowerTitle = document.getElementById("flower-title");
+        flowerTitle.textContent = flower.name;
+      }
+
+      window.onload = function () {
+        if (configuration.isLoggedIn()) {
+          var loggedOutUser = document.getElementById("loggedOutUser");
+          loggedOutUser.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
