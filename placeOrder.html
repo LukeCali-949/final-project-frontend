@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Summary</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+
+        justify-content: center;
+        align-items: center;
+        height: 120vh;
+      }
+
+      .order-container {
+        width: 800px;
+        gap: 20px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .order-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      .order-container img {
+        width: 170px;
+        height: 170px;
+      }
+
+      .order-header h2 {
+        font-size: 22px;
+        margin: 0;
+      }
+
+      .order-details {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .order-summary {
+        background: #e9e9e9;
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      .order-summary div {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+      }
+
+      .total {
+        font-weight: bold;
+      }
+
+      .button {
+        width: 100%;
+        padding: 12px;
+        background-color: #00704a;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      .button:hover {
+        background-color: #005c37;
+        cursor: pointer;
+      }
+
+      .small-text {
+        font-size: 12px;
+        color: #666;
+        text-align: right;
+        margin-top: 20px;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .flexColumn {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .right-section {
+        width: 700px;
+      }
+
+      .deliv {
+        gap: 5px;
+      }
+
+      #delivDate {
+        font-weight: bold;
+      }
+
+      .placeOrderButton {
+        width: 150px;
+        margin-left: 75%;
+      }
+
+      .discountDiv {
+        background-color: #9bd5b2;
+        height: 50px;
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      .discountText {
+        font-size: 13px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      /* top part */
+      .progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #f7f7f7;
+        margin-bottom: 70px;
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .progress-bar {
+        position: relative;
+        height: 5px;
+        background-color: #c7c7c7;
+        width: 100%;
+        margin: 0 10px;
+      }
+
+      .progress-bar .completed {
+        width: 100%;
+        height: 100%;
+        background-color: #00704a;
+      }
+
+      .step {
+        font-size: 14px;
+        text-align: center;
+        flex: 1;
+      }
+
+      .step.completed {
+        color: #00704a;
+      }
+
+      .step.pending {
+        color: lightgray;
+      }
+
+      .info-box {
+        background-color: #00704a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
+      .doneText {
+        font-weight: bold;
+        border: 5px solid #00704a;
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress">
+      <div class="step completed">REVIEW</div>
+      <div class="progress-bar">
+        <div class="completed"></div>
+      </div>
+      <div class="step completed" id="delivery">DELIVERY</div>
+
+      <div class="progress-bar"><div class="completed"></div></div>
+
+      <div class="step completed doneText">DONE</div>
+    </div>
+    <div class="order-container flex">
+      <img id="flowerImage" src="" alt="Flower Image" />
+      <div class="right-section">
+        <div class="order-header">
+          <h2 id="flowerName">Flower Name</h2>
+        </div>
+        ------------------------------------------------------------------------------------------------
+
+        <div class="flex deliv">
+          <p id="delivDate">Delivery Date:</p>
+          <p id="deliveryDate">2024-04-30</p>
+        </div>
+        ------------------------------------------------------------------------------------------------
+        <div class="order-details">
+          <p id="itemPricing"></p>
+          ------------------------------------------------------------------------------------------------
+
+          <p id="deliveryAddress"></p>
+        </div>
+
+        <div class="order-summary">
+          <div class="discountDiv">
+            <p class="discountText">You are saving $10.00 on this order!</p>
+          </div>
+          <div><span>SUBTOTAL:</span> <span id="subTotal"></span></div>
+          <div><span>Delivery:</span> <span>$25.00</span></div>
+          <div><span>Delivery Discount:</span> <span>-$10.00</span></div>
+          <div><span>Tax:</span> <span>$0.00</span></div>
+          <div class="total">
+            <span>ORDER TOTAL:</span> <span id="total"></span>
+          </div>
+        </div>
+
+        <p class="small-text">
+          By Clicking "Place Order" you agree to the Terms of Use and Privacy
+          Policy
+        </p>
+        <button class="button placeOrderButton">Place Order</button>
+      </div>
+    </div>
+    <script>
+      const orderData = JSON.parse(localStorage.getItem("orderData"));
+      const selectedFlower = JSON.parse(localStorage.getItem("selectedFlower"));
+
+      if (selectedFlower && orderData) {
+        document.getElementById("flowerImage").src = selectedFlower.imageURL;
+        document.getElementById("flowerName").textContent = selectedFlower.name;
+        document.getElementById(
+          "itemPricing"
+        ).innerHTML = `<strong>Item Pricing: </strong> $${selectedFlower.price}`;
+        document.getElementById(
+          "deliveryAddress"
+        ).innerHTML = `<strong>Delivery Address</strong><br>${orderData.firstName} ${orderData.lastName}<br>${orderData.address}<br>${orderData.city} ${orderData.state} ${orderData.zipCode}<br>(812) 856-5230`;
+
+        document.getElementById("subTotal").textContent =
+          "$" + selectedFlower.price;
+        const total = selectedFlower.price + 25 - 10;
+        document.getElementById("total").textContent = "$" + total;
+      }
+    </script>
+  </body>
+</html>

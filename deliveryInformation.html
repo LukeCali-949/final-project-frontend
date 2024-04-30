@@ -346,6 +346,45 @@
           loggedOutUser.style.display = "none";
         }
       };
+
+      function submitForm() {
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const relationship = document.getElementById("relationship").value;
+        const address = document.getElementById("address").value;
+        const city = document.getElementById("city").value;
+        const state = document.getElementById("state").value;
+        const zipCode = document.getElementById("zip-code").value;
+
+        if (
+          firstName &&
+          lastName &&
+          relationship &&
+          address &&
+          city &&
+          state &&
+          zipCode
+        ) {
+          const formData = {
+            firstName,
+            lastName,
+            relationship,
+            address,
+            city,
+            state,
+            zipCode,
+          };
+          localStorage.setItem("orderData", JSON.stringify(formData));
+
+          if (configuration.isLoggedIn()) {
+            window.location.href = "/placeOrder.html";
+          } else {
+            window.location.href = "/login.html";
+          }
+        } else {
+          alert("Please fill all required fields.");
+        }
+      }
     </script>
   </body>
 </html>
