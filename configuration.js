@@ -49,7 +49,7 @@ async function signup() {
   })
     .then((response) => {
       if (response.ok) {
-        alert("Signup successful");
+        alert("Signup successful, Now Login To Start Ordering Flowers!");
       } else {
         console.log(`response status:${response.status}`);
         alert("Something went wrong!");
@@ -65,6 +65,7 @@ async function signup() {
 async function login() {
   let email = document.getElementById("loginEmail").value;
   let username = email.split("@")[0];
+
   let password = document.getElementById("loginPassword").value;
   let customer = { username: username, password: password };
   let request = {
@@ -115,10 +116,61 @@ function addToBasket() {
 
   localStorage.setItem("deliveryDate", deliveryDate);
   localStorage.setItem("purchasingOption", purchasingOption.id);
+  localStorage.setItem("itemInCart", true);
 
   window.location.href = "deliveryInformation.html";
 }
 
 function directToLoginPage() {
   location.href = "login.html";
+}
+
+function PostOrder() {
+  const orderData = JSON.parse(localStorage.getItem("orderData"));
+  const selectedFlower = JSON.parse(localStorage.getItem("selectedFlower"));
+  const username = localStorage.getItem("username");
+
+  const order = {
+    flowerId: Number(selectedFlower.id),
+    recipientName: `${orderData.firstName} ${orderData.lastName}`,
+    totalCost: Number(selectedFlower.price),
+    customerUserName: username,
+  };
+
+  fetch(getHost() + "/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getTheToken()}`,
+    },
+    body: JSON.stringify(order),
+  })
+    .then((response) => {
+      console.log(response.json());
+    })
+    .then((window.location.href = "MyOrders.html"))
+    .catch((error) => {
+      console.log(error);
+      alert("Something went wrong!");
+    });
+}
+
+function getOrders() {
+  const username = localStorage.getItem("username");
+
+  fetch(getHost() + "/orders/" + username, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getTheToken()}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Something went wrong!");
+    });
 }

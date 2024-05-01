@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="configuration.js"></script>
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: white;
+        border-bottom: 1px solid lightgray;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: orange;
+      }
+
+      .nav-items {
+        display: flex;
+        gap: 15px;
+      }
+
+      .nav-items a {
+        text-decoration: none;
+        color: black;
+        font-weight: normal;
+      }
+
+      .cart {
+        display: flex;
+        align-items: center;
+      }
+
+      .cart img {
+        margin-right: 5px;
+        width: 40px;
+      }
+
+      .login img {
+        width: 40px;
+      }
+
+      .cart-items {
+        font-size: 13px;
+        color: white;
+        position: absolute;
+        right: 38px;
+      }
+
+      .content-wrapper {
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .main-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        height: 400px;
+      }
+
+      .left-section {
+        width: 50%;
+        background-color: lightpink;
+        padding: 20px;
+      }
+
+      .right-section {
+        width: 50%;
+      }
+
+      .right-section img {
+        width: auto;
+        height: 400px;
+      }
+
+      .orderDisplay {
+        margin-top: 100px;
+        width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .order-container {
+        width: 800px;
+        margin: 20px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      .order-details {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+      }
+    </style>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="index.html" class="logo">Final Project</a>
+
+      <div class="nav-items">
+        <a href="#">Track Order</a>
+        <a href="#">Help</a>
+        <a href="login.html" class="login">
+          <img src="personicon.png" />
+        </a>
+        <a href="#" class="cart">
+          <img src="carticon.png" />
+          <span id="cartNumber" class="cart-items" id="cartNumber">0</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="orderDisplay">
+      <h1>My Orders</h1>
+      <hr />
+    </div>
+    <div class="order-container" id="ordersContainer"></div>
+
+    <script src="configuration.js"></script>
+
+    <script>
+      window.onload = function () {
+        if (configuration.isLoggedIn()) {
+          configuration.directToLoginPage();
+        }
+      };
+      function getOrders() {
+        const username = localStorage.getItem("username");
+
+        fetch(getHost() + "/orders/" + username, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getTheToken()}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            displayOrders(data);
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("Something went wrong!");
+          });
+      }
+
+      function displayOrders(orders) {
+        const container = document.getElementById("ordersContainer");
+
+        container.innerHTML = "";
+
+        if (orders.length === 0) {
+          const noOrdersMessage = document.createElement("div");
+          noOrdersMessage.className = "order-details";
+          noOrdersMessage.textContent = "You have no orders";
+          container.appendChild(noOrdersMessage);
+        } else {
+          orders.forEach((order) => {
+            const details = document.createElement("div");
+            details.className = "order-details";
+            details.innerHTML = `
+                <p>Flower Name: ${
+                  order.flowerId == 1
+                    ? "Radiant Rose"
+                    : order.flowerId == 2
+                    ? "Golden Lily"
+                    : order.flowerId == 3
+                    ? "Vibrant Tulip"
+                    : order.flowerId == 4
+                    ? "Sunny Daisy"
+                    : order.flowerId == 5
+                    ? "Serene Rose"
+                    : "Festive Lily"
+                }</p>
+                <p>Total Cost: $${order.totalCost.toFixed(2)}</p>
+                <p>Recipient: ${order.recipientName.split(" ")[0]} ${
+              order.recipientName.split(" ")[1]
+            }</p>
+                <p>Status: Placed</p>
+            `;
+            container.appendChild(details);
+          });
+        }
+      }
+
+      const cartItems = document.getElementById("cartNumber");
+      if (localStorage.getItem("itemInCart")) {
+        cartItems.textContent = "1";
+      }
+
+      getOrders();
+    </script>
+  </body>
+</html>

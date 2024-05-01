@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -94,68 +94,31 @@
     <div class="container" id="flower-container"></div>
 
     <script>
-      const flowerData = [
-        {
-          name: "Radiant Rose",
-          flower_type: "Roses",
-          occasion: "Birthday",
-          color: "Red",
-          price: 54,
-          imageURL:
-            "https://files.oaiusercontent.com/file-AoOH71Bt8bCL4kR6GWouE3fh?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dc85126a7-b2d2-43e0-92ee-7b1440718d10.webp&sig=xDtjhzZ2n0q%2B83CYt5ON/JQkxbO1Gn7Hq3LVFn/lUPM%3D",
-        },
-        {
-          name: "Golden Lily",
-          flower_type: "Lilies",
-          occasion: "Mother's Day",
-          color: "Yellow",
-          price: 47,
-          imageURL:
-            "https://files.oaiusercontent.com/file-2XEmXGEJ07qY8L9E1smUTgK9?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D36875d3f-46c2-4a44-907b-564e6b09ab1d.webp&sig=ULgEHtoKV4/kQGxu2Z8VbQj95kQDcu5wVTj4su4CAWA%3D",
-        },
-        {
-          name: "Vibrant Tulip",
-          flower_type: "Tulips",
-          occasion: "Thank You",
-          color: "Mixed",
-          price: 56,
-          imageURL:
-            "https://files.oaiusercontent.com/file-YvgNnVF8Yewtpde4sUMUMi2I?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D02db3308-ab38-49d4-936b-8a7b0750e14d.webp&sig=V4uB/WhWb/M9z8sco73QiynKquPJ3zpFbOET8QWteFo%3D",
-        },
-        {
-          name: "Sunny Daisy",
-          flower_type: "Dasies",
-          occasion: "Mother's Day",
-          color: "Orange",
-          price: 41,
-          imageURL:
-            "https://files.oaiusercontent.com/file-KRWs1lEduN10YvvvLQbCDU07?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D92853e4c-128c-4d3f-be24-c29ddeff4a63.webp&sig=/CzRDDODdby%2BMu0%2BLrbvlrNOGumE1pGspajn7HHnlCE%3D",
-        },
-        {
-          name: "Serene Rose",
-          flower_type: "Roses",
-          occasion: "Thank You",
-          color: "Green",
-          price: 58,
-          imageURL:
-            "https://files.oaiusercontent.com/file-nxQVePhhvrG5Qt14d4tNvqXa?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dc169f167-ef1f-42de-8757-e1e29bdc3ea6.webp&sig=szoo5dPDZe0YlAH26BtOPbK4i0pVH9uTeJt9SpSZUi8%3D",
-        },
-        {
-          name: "Festive Lily",
-          flower_type: "Lilies",
-          occasion: "Birthday",
-          color: "Mixed",
-          price: 50,
-          imageURL:
-            "https://files.oaiusercontent.com/file-Fv4ksPVL4e23lMXdUZR1DGbb?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dbd64d19e-22c4-42c2-b842-bdd94e185b40.webp&sig=A9pFtsfTJ5aVynamk78IijR9qAzj6T9oqYr3ry1h1Cc%3D",
-        },
+      const flowerImages = [
+        "https://files.oaiusercontent.com/file-AoOH71Bt8bCL4kR6GWouE3fh?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dc85126a7-b2d2-43e0-92ee-7b1440718d10.webp&sig=xDtjhzZ2n0q%2B83CYt5ON/JQkxbO1Gn7Hq3LVFn/lUPM%3D",
+        "https://files.oaiusercontent.com/file-2XEmXGEJ07qY8L9E1smUTgK9?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D36875d3f-46c2-4a44-907b-564e6b09ab1d.webp&sig=ULgEHtoKV4/kQGxu2Z8VbQj95kQDcu5wVTj4su4CAWA%3D",
+        "https://files.oaiusercontent.com/file-YvgNnVF8Yewtpde4sUMUMi2I?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D02db3308-ab38-49d4-936b-8a7b0750e14d.webp&sig=V4uB/WhWb/M9z8sco73QiynKquPJ3zpFbOET8QWteFo%3D",
+        "https://files.oaiusercontent.com/file-KRWs1lEduN10YvvvLQbCDU07?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D92853e4c-128c-4d3f-be24-c29ddeff4a63.webp&sig=/CzRDDODdby%2BMu0%2BLrbvlrNOGumE1pGspajn7HHnlCE%3D",
+        "https://files.oaiusercontent.com/file-nxQVePhhvrG5Qt14d4tNvqXa?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dc169f167-ef1f-42de-8757-e1e29bdc3ea6.webp&sig=szoo5dPDZe0YlAH26BtOPbK4i0pVH9uTeJt9SpSZUi8%3D",
+        "https://files.oaiusercontent.com/file-Fv4ksPVL4e23lMXdUZR1DGbb?se=2024-04-27T21%3A22%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dbd64d19e-22c4-42c2-b842-bdd94e185b40.webp&sig=A9pFtsfTJ5aVynamk78IijR9qAzj6T9oqYr3ry1h1Cc%3D",
       ];
+
+      fetch("http://localhost:3000/flowers")
+        .then((response) => response.json())
+        .then((data) => {
+          const flowerData = data.map((flower, index) => ({
+            ...flower,
+            imageURL: flowerImages[index],
+          }));
+          renderFlowers(flowerData);
+        })
+        .catch((error) => console.error("Error fetching flower data:", error));
 
       const container = document.getElementById("flower-container");
 
       const renderFlowers = (flowers) => {
         container.innerHTML = "";
-        flowers.map((flower) => {
+        flowers.forEach((flower) => {
           const flowerCard = document.createElement("div");
           flowerCard.className = "flower-card";
 
@@ -187,53 +150,18 @@
         });
       };
 
-      renderFlowers(flowerData);
-
-      const filterFlowers = () => {
-        const flowerType = document.getElementById("flower-type").value;
-        const occasion = document.getElementById("occasion").value;
-        const color = document.getElementById("color").value;
-        const sortPrice = document.getElementById("sort-price").value;
-
-        let filteredFlowers = flowerData;
-
-        if (flowerType) {
-          filteredFlowers = filteredFlowers.filter(
-            (flower) => flower.flower_type === flowerType
-          );
-        }
-        if (occasion) {
-          filteredFlowers = filteredFlowers.filter(
-            (flower) => flower.occasion === occasion
-          );
-        }
-        if (color) {
-          filteredFlowers = filteredFlowers.filter(
-            (flower) => flower.color === color
-          );
-        }
-
-        if (sortPrice === "asc") {
-          filteredFlowers.sort((a, b) => a.price - b.price);
-        } else if (sortPrice === "desc") {
-          filteredFlowers.sort((a, b) => b.price - a.price);
-        }
-
-        renderFlowers(filteredFlowers);
-      };
-
       document
         .getElementById("flower-type")
-        .addEventListener("change", filterFlowers);
+        .addEventListener("change", () => filterFlowers(flowerData));
       document
         .getElementById("occasion")
-        .addEventListener("change", filterFlowers);
+        .addEventListener("change", () => filterFlowers(flowerData));
       document
         .getElementById("color")
-        .addEventListener("change", filterFlowers);
+        .addEventListener("change", () => filterFlowers(flowerData));
       document
         .getElementById("sort-price")
-        .addEventListener("change", filterFlowers);
+        .addEventListener("change", () => filterFlowers(flowerData));
     </script>
   </body>
-</html>
+</html> -->

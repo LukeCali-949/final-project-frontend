@@ -134,14 +134,14 @@
       <a href="index.html" class="logo">Final Project</a>
 
       <div class="nav-items">
-        <a href="#">Track Order</a>
+        <a href="MyOrders.html">Track Order</a>
         <a href="#">Help</a>
         <a href="login.html" class="login">
           <img src="personicon.png" />
         </a>
         <a href="#" class="cart">
           <img src="carticon.png" />
-          <span class="cart-items">0</span>
+          <span class="cart-items" id="cartNumber">0</span>
         </a>
       </div>
     </div>
@@ -206,6 +206,11 @@
         flowerTitle.textContent = flower.name;
       } else {
         console.warn("No flower data found in localStorage.");
+      }
+
+      const cartItems = document.getElementById("cartNumber");
+      if (localStorage.getItem("itemInCart")) {
+        cartItems.textContent = "1";
       }
     </script>
   </body>

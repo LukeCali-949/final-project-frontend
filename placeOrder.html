@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="configuration.js"></script>
     <title>Order Summary</title>
     <style>
       body {
@@ -232,7 +233,9 @@
           By Clicking "Place Order" you agree to the Terms of Use and Privacy
           Policy
         </p>
-        <button class="button placeOrderButton">Place Order</button>
+        <button class="button placeOrderButton" onClick="PostOrder()">
+          Place Order
+        </button>
       </div>
     </div>
     <script>
