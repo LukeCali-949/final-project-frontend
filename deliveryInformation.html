@@ -325,25 +325,38 @@
       const storedFlower = localStorage.getItem("selectedFlower");
       const deliveryDate = localStorage.getItem("deliveryDate");
 
-      if (storedFlower) {
-        const flower = JSON.parse(storedFlower);
-
-        const flowerImage = document.getElementById("flower-image");
-        flowerImage.src = flower.imageURL;
-
-        const flowerDate = document.getElementById("flowDelivDate");
-        flowerDate.textContent = deliveryDate;
-
-        const flowerPrice = document.getElementById("flower-price");
-        flowerPrice.textContent = "$" + flower.price;
-        const flowerTitle = document.getElementById("flower-title");
-        flowerTitle.textContent = flower.name;
-      }
-
       window.onload = function () {
         if (configuration.isLoggedIn()) {
           var loggedOutUser = document.getElementById("loggedOutUser");
           loggedOutUser.style.display = "none";
+        }
+        const originalFlowerPrice = localStorage.getItem("originalFlowerPrice");
+
+        const storedFlower = localStorage.getItem("selectedFlower");
+        const flower = JSON.parse(storedFlower);
+        console.log(localStorage.getItem("purchasingOption"));
+
+        if (localStorage.getItem("purchasingOption") === "one-time") {
+          flower.price = Number(originalFlowerPrice) + 15;
+          localStorage.setItem("selectedFlower", JSON.stringify(flower));
+        } else {
+          flower.price = Number(originalFlowerPrice);
+          localStorage.setItem("selectedFlower", JSON.stringify(flower));
+        }
+
+        if (storedFlower) {
+          //const flower = JSON.parse(storedFlower);
+
+          const flowerImage = document.getElementById("flower-image");
+          flowerImage.src = flower.imageURL;
+
+          const flowerDate = document.getElementById("flowDelivDate");
+          flowerDate.textContent = deliveryDate;
+
+          const flowerPrice = document.getElementById("flower-price");
+          flowerPrice.textContent = "$" + flower.price;
+          const flowerTitle = document.getElementById("flower-title");
+          flowerTitle.textContent = flower.name;
         }
       };
 

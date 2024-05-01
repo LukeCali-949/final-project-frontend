@@ -171,6 +171,14 @@
           loginButton.classList.add("active");
         }
       }
+
+      const cartItems = document.getElementById("cartNumber");
+
+      if (localStorage.getItem("itemInCart") === true) {
+        cartItems.textContent = "1";
+      } else {
+        cartItems.textContent = "0";
+      }
     </script>
   </head>
   <body onload="toggleForm('signup')">
@@ -185,7 +193,7 @@
         </a>
         <a href="#" class="cart">
           <img src="carticon.png" />
-          <span class="cart-items">0</span>
+          <span class="cart-items" id="cartNumber">0</span>
         </a>
       </div>
     </div>

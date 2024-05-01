@@ -50,6 +50,8 @@ async function signup() {
     .then((response) => {
       if (response.ok) {
         alert("Signup successful, Now Login To Start Ordering Flowers!");
+        toggleForm("login");
+        localStorage.setItem("username", username);
       } else {
         console.log(`response status:${response.status}`);
         alert("Something went wrong!");
@@ -126,6 +128,12 @@ function directToLoginPage() {
 }
 
 function PostOrder() {
+  if (!localStorage.getItem("token")) {
+    alert("you must be logged in to place an order");
+    location.href = login.html;
+    return;
+  }
+
   const orderData = JSON.parse(localStorage.getItem("orderData"));
   const selectedFlower = JSON.parse(localStorage.getItem("selectedFlower"));
   const username = localStorage.getItem("username");
@@ -149,10 +157,16 @@ function PostOrder() {
       console.log(response.json());
     })
     .then((window.location.href = "MyOrders.html"))
+    .then(alert("Order Succesfully Placed!"))
+
     .catch((error) => {
       console.log(error);
       alert("Something went wrong!");
     });
+
+  localStorage.setItem("itemInCart", false);
+  localStorage.setItem("orderData", {});
+  localStorage.setItem("selectedFlower", {});
 }
 
 function getOrders() {
@@ -173,4 +187,23 @@ function getOrders() {
       console.log(error);
       alert("Something went wrong!");
     });
+}
+
+function toggleForm(view) {
+  const signupForm = document.getElementById("signup-form");
+  const loginForm = document.getElementById("login-form");
+  const signupButton = document.getElementById("signup-button");
+  const loginButton = document.getElementById("login-button");
+
+  if (view === "signup") {
+    signupForm.style.display = "flex";
+    loginForm.style.display = "none";
+    signupButton.classList.add("active");
+    loginButton.classList.remove("active");
+  } else {
+    signupForm.style.display = "none";
+    loginForm.style.display = "flex";
+    signupButton.classList.remove("active");
+    loginButton.classList.add("active");
+  }
 }

@@ -248,6 +248,7 @@
 
           flowerCard.addEventListener("click", () => {
             localStorage.setItem("selectedFlower", JSON.stringify(flower));
+            localStorage.setItem("originalFlowerPrice", flower.price);
             window.location.href = "addToBasket.html";
           });
 
@@ -288,8 +289,10 @@
       };
 
       const cartItems = document.getElementById("cartNumber");
-      if (localStorage.getItem("itemInCart")) {
+      if (localStorage.getItem("itemInCart") === true) {
         cartItems.textContent = "1";
+      } else {
+        cartItems.textContent = "0";
       }
 
       document

@@ -164,7 +164,7 @@
         <div class="purchase-options" id="purchaseOptions">
           <div class="option">
             <input type="radio" name="purchase-option" id="subscription" />
-            <label for="subscription"
+            <label for="subscription" id="subscriptionPrice"
               >Start a Subscription: $52 + free shipping</label
             >
             <p>
@@ -183,7 +183,9 @@
 
           <div class="option">
             <input type="radio" name="purchase-option" id="one-time" />
-            <label for="one-time">One-time purchase: $74</label>
+            <label for="one-time" id="oneTimePrice"
+              >One-time purchase: $74</label
+            >
           </div>
         </div>
 
@@ -194,6 +196,7 @@
     </div>
 
     <script>
+      const originalFlowerPrice = localStorage.getItem("originalFlowerPrice");
       const storedFlower = localStorage.getItem("selectedFlower");
 
       if (storedFlower) {
@@ -204,13 +207,23 @@
 
         const flowerTitle = document.getElementById("flower-title");
         flowerTitle.textContent = flower.name;
+
+        const oneTimePrice = document.getElementById("oneTimePrice");
+        oneTimePrice.textContent =
+          "One time purchase: $" + (Number(originalFlowerPrice) + 15);
+
+        const subscriptionPrice = document.getElementById("subscriptionPrice");
+        subscriptionPrice.textContent =
+          "Start a Subcription: $" + originalFlowerPrice + " + free shipping";
       } else {
         console.warn("No flower data found in localStorage.");
       }
 
       const cartItems = document.getElementById("cartNumber");
-      if (localStorage.getItem("itemInCart")) {
+      if (localStorage.getItem("itemInCart") === true) {
         cartItems.textContent = "1";
+      } else {
+        cartItems.textContent = "0";
       }
     </script>
   </body>

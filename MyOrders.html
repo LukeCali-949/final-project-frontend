@@ -130,8 +130,8 @@
 
     <script>
       window.onload = function () {
-        if (configuration.isLoggedIn()) {
-          configuration.directToLoginPage();
+        if (!localStorage.getItem("token")) {
+          location.href = "login.html";
         }
       };
       function getOrders() {
@@ -150,7 +150,9 @@
           })
           .catch((error) => {
             console.log(error);
-            alert("Something went wrong!");
+            alert(
+              "Something went wrong! You may need to signup or signin again in order to view this page"
+            );
           });
       }
 
@@ -194,8 +196,11 @@
       }
 
       const cartItems = document.getElementById("cartNumber");
-      if (localStorage.getItem("itemInCart")) {
+      //console.log(localStorage.getItem("itemInCart"));
+      if (localStorage.getItem("itemInCart") === true) {
         cartItems.textContent = "1";
+      } else {
+        cartItems.textContent = "0";
       }
 
       getOrders();

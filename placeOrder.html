@@ -218,11 +218,15 @@
 
         <div class="order-summary">
           <div class="discountDiv">
-            <p class="discountText">You are saving $10.00 on this order!</p>
+            <p class="discountText" id="discountText2">
+              You are saving $10.00 on this order!
+            </p>
           </div>
           <div><span>SUBTOTAL:</span> <span id="subTotal"></span></div>
           <div><span>Delivery:</span> <span>$25.00</span></div>
-          <div><span>Delivery Discount:</span> <span>-$10.00</span></div>
+          <div id="deliveryDiscount">
+            <span>Delivery Discount:</span> <span>-$10.00</span>
+          </div>
           <div><span>Tax:</span> <span>$0.00</span></div>
           <div class="total">
             <span>ORDER TOTAL:</span> <span id="total"></span>
@@ -239,6 +243,12 @@
       </div>
     </div>
     <script>
+      if (!localStorage.getItem("token")) {
+        document.getElementById("deliveryDiscount").innerHTML = "";
+        document.getElementById("discountText2").innerHTML =
+          "You are NOT saving $10.00 on this order!";
+      }
+
       const orderData = JSON.parse(localStorage.getItem("orderData"));
       const selectedFlower = JSON.parse(localStorage.getItem("selectedFlower"));
 
@@ -254,7 +264,17 @@
 
         document.getElementById("subTotal").textContent =
           "$" + selectedFlower.price;
-        const total = selectedFlower.price + 25 - 10;
+
+        const originalFlowerPrice = localStorage.getItem("originalFlowerPrice");
+
+        let total = selectedFlower.price + 25 - 10;
+
+        if (!localStorage.getItem("token")) {
+          total += 10;
+        }
+        selectedFlower.price = total;
+        localStorage.setItem("selectedFlower", JSON.stringify(selectedFlower));
+
         document.getElementById("total").textContent = "$" + total;
       }
     </script>
