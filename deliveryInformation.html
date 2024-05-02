@@ -389,10 +389,11 @@
           };
           localStorage.setItem("orderData", JSON.stringify(formData));
 
-          if (configuration.isLoggedIn()) {
-            location.href = "placeOrder.html";
+          const basePath = "/frontend-site/";
+          if (!localStorage.getItem("token")) {
+            location.href = basePath + "placeOrder.html";
           } else {
-            location.href = "login.html";
+            location.href = basePath + "login.html";
           }
         } else {
           alert("Please fill all required fields.");
