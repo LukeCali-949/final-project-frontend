@@ -220,7 +220,7 @@
       }
 
       const cartItems = document.getElementById("cartNumber");
-      if (localStorage.getItem("itemInCart") === true) {
+      if (localStorage.getItem("itemInCart")) {
         cartItems.textContent = "1";
       } else {
         cartItems.textContent = "0";

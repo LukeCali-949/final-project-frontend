@@ -1,7 +1,7 @@
-const mode = 0;
+const mode = 1;
 
 const host_local = "http://localhost:3000";
-const host_remote = "";
+const host_remote = "https://final-project-backend-2-latest.onrender.com";
 
 function getHost() {
   return mode == 0 ? host_local : host_remote;

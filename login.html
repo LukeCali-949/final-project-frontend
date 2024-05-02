@@ -151,35 +151,13 @@
       #showPassword {
         margin-left: auto;
       }
+
+      .showPass {
+        margin-bottom: 5px;
+        margin-left: auto;
+        cursor: pointer;
+      }
     </style>
-    <script>
-      function toggleForm(view) {
-        const signupForm = document.getElementById("signup-form");
-        const loginForm = document.getElementById("login-form");
-        const signupButton = document.getElementById("signup-button");
-        const loginButton = document.getElementById("login-button");
-
-        if (view === "signup") {
-          signupForm.style.display = "flex";
-          loginForm.style.display = "none";
-          signupButton.classList.add("active");
-          loginButton.classList.remove("active");
-        } else {
-          signupForm.style.display = "none";
-          loginForm.style.display = "flex";
-          signupButton.classList.remove("active");
-          loginButton.classList.add("active");
-        }
-      }
-
-      const cartItems = document.getElementById("cartNumber");
-
-      if (localStorage.getItem("itemInCart") === true) {
-        cartItems.textContent = "1";
-      } else {
-        cartItems.textContent = "0";
-      }
-    </script>
   </head>
   <body onload="toggleForm('signup')">
     <div class="navbar">
@@ -223,6 +201,12 @@
         <label for="signupPassword" class="inputLabel">Password</label>
 
         <input type="password" id="signupPassword" placeholder="Password" />
+        <a
+          id="showPassword1"
+          class="showPass"
+          onclick="togglePasswordVisibility()"
+          >Show Password</a
+        >
         <button onClick="signup()">CREATE AN ACCOUNT</button>
         <a id="createAnAccount"
           >By Clicking "Create an Account" you agree to the Terms of Use and
@@ -236,10 +220,65 @@
         <input id="loginEmail" type="email" placeholder="name@example.com" />
         <label for="loginPassword" class="inputLabel">Password</label>
         <input id="loginPassword" type="password" placeholder="Password" />
-        <a id="showPassword">Show Password</a>
+        <a
+          class="showPass"
+          id="showPassword2"
+          onclick="togglePasswordVisibility()"
+          >Show Password</a
+        >
 
         <button onClick="login()">LOG IN</button>
       </div>
     </div>
+    <script>
+      function toggleForm(view) {
+        const signupForm = document.getElementById("signup-form");
+        const loginForm = document.getElementById("login-form");
+        const signupButton = document.getElementById("signup-button");
+        const loginButton = document.getElementById("login-button");
+
+        if (view === "signup") {
+          signupForm.style.display = "flex";
+          loginForm.style.display = "none";
+          signupButton.classList.add("active");
+          loginButton.classList.remove("active");
+        } else {
+          signupForm.style.display = "none";
+          loginForm.style.display = "flex";
+          signupButton.classList.remove("active");
+          loginButton.classList.add("active");
+        }
+      }
+
+      function togglePasswordVisibility() {
+        var passwordInput1 = document.getElementById("loginPassword");
+        var passwordInput2 = document.getElementById("signupPassword");
+        var showPasswordLink1 = document.getElementById("showPassword1");
+        var showPasswordLink2 = document.getElementById("showPassword2");
+
+        if (
+          passwordInput1.type === "password" ||
+          passwordInput2.type === "password"
+        ) {
+          passwordInput1.type = "text";
+          showPasswordLink1.textContent = "Hide Password";
+          passwordInput2.type = "text";
+          showPasswordLink2.textContent = "Hide Password";
+        } else {
+          passwordInput1.type = "password";
+          showPasswordLink1.textContent = "Show Password";
+          passwordInput2.type = "password";
+          showPasswordLink2.textContent = "Show Password";
+        }
+      }
+
+      const cartItems = document.getElementById("cartNumber");
+
+      if (localStorage.getItem("itemInCart")) {
+        cartItems.textContent = "1";
+      } else {
+        cartItems.textContent = "0";
+      }
+    </script>
   </body>
 </html>

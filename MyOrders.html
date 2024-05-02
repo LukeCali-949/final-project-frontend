@@ -197,7 +197,7 @@
 
       const cartItems = document.getElementById("cartNumber");
       //console.log(localStorage.getItem("itemInCart"));
-      if (localStorage.getItem("itemInCart") === true) {
+      if (localStorage.getItem("itemInCart")) {
         cartItems.textContent = "1";
       } else {
         cartItems.textContent = "0";

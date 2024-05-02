@@ -208,7 +208,7 @@
 
       let flowerData;
 
-      fetch("http://localhost:3000/flowers")
+      fetch("https://final-project-backend-2-latest.onrender.com/flowers")
         .then((response) => response.json())
         .then((data) => {
           flowerData = data.map((flower, index) => ({
@@ -289,8 +289,10 @@
       };
 
       const cartItems = document.getElementById("cartNumber");
-      if (localStorage.getItem("itemInCart") === true) {
+      console.log(localStorage.getItem("itemInCart"));
+      if (localStorage.getItem("itemInCart")) {
         cartItems.textContent = "1";
+        console.log("got here");
       } else {
         cartItems.textContent = "0";
       }
