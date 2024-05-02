@@ -390,10 +390,10 @@
           localStorage.setItem("orderData", JSON.stringify(formData));
 
           const basePath = "/final-project-frontend/";
-          if (!localStorage.getItem("token")) {
+          if (localStorage.getItem("token")) {
             location.href = basePath + "placeOrder.html";
           } else {
-            location.href = basePath + "login.html";
+            location.href = basePath + "placeOrder.html";
           }
         } else {
           alert("Please fill all required fields.");
