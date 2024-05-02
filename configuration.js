@@ -130,7 +130,7 @@ function directToLoginPage() {
 function PostOrder() {
   if (!localStorage.getItem("token")) {
     alert("you must be logged in to place an order");
-    location.href = login.html;
+    location.href = "login.html";
     return;
   }
 
