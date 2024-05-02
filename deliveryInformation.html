@@ -390,9 +390,9 @@
           localStorage.setItem("orderData", JSON.stringify(formData));
 
           if (configuration.isLoggedIn()) {
-            window.location.href = "final-project-frontend/placeOrder.html";
+            location.href = "placeOrder.html";
           } else {
-            window.location.href = "final-project-frontend/login.html";
+            location.href = "login.html";
           }
         } else {
           alert("Please fill all required fields.");
